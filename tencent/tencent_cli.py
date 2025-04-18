@@ -4,7 +4,7 @@ import time
 import io
 import sys
 import traceback
-from common.logger import logger
+from video_srt.common.logger import logger
 
 from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
@@ -12,10 +12,10 @@ from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
 from tencentcloud.asr.v20190614 import asr_client, models
 
-if sys.version_info[0] == 3:
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+# if sys.version_info[0] == 3:
+#     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
-from tencent.config import Config
+from video_srt.tencent.config import Config
 
 
 def new_audio_file(engine_type, audio_url):

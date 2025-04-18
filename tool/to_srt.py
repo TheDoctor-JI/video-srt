@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import traceback
-from common.logger import logger
-from tool.time_format import ms_to_hours
+from video_srt.common.logger import logger
+from video_srt.tool.time_format import ms_to_hours
 import subprocess
 
 

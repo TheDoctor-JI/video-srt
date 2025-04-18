@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from common.logger import logger
+from video_srt.common.logger import logger
 from qcloud_cos import CosConfig
 from qcloud_cos import CosS3Client
 from qcloud_cos.cos_exception import CosClientError, CosServiceError
-from cos.config import Config
+from video_srt.cos.config import Config
 
 
 def create_client(key_id, key_secret):
