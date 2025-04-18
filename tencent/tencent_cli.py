@@ -44,7 +44,20 @@ def create_client(key_id, key_secret):
 def create_rec(engine_type, file_url):
     client = create_client(Config.SECRET_ID, Config.SECRET_KEY)
     req = models.CreateRecTaskRequest()
-    params = {"ChannelNum": 1, "ResTextFormat": 3, "SourceType": 0, "ConvertNumMode": 1}
+    params = {
+        #Audio format
+        "ChannelNum": 1, 
+        "ResTextFormat": 3, 
+
+        #Data source
+        "SourceType": 0, 
+
+        "ConvertNumMode": 0,
+
+        # # Controls whether we will do speaker diarization
+        # "SpeakerDiarization ": 1,
+        # "SpeakerNumber": 0,
+    }
     req._deserialize(params)
     req.EngineModelType = engine_type
     req.Url = file_url

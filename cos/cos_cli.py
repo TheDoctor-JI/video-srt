@@ -41,10 +41,13 @@ def get_object_url(cos_file_path):
             Key=cos_file_path
         )
         if exists:
-            url = client.get_object_url(
+            url = client.get_presigned_url(
+                Method = 'GET',
                 Bucket=Config.BUCKET,
-                Key=cos_file_path
+                Key=cos_file_path,
+                Expired = 1200,
             )
+            logger.info(f"Object URL: {url}")
             return url
     except CosServiceError as err:
         logger.info(err)

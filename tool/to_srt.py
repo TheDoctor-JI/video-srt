@@ -8,7 +8,7 @@ import subprocess
 def make_srt(srt_txt, file_name):
     file_name = file_name
     try:
-        subprocess.check_call(["touch", file_name], shell=False)
+        # subprocess.check_call(["touch", file_name], shell=False)
         f = open(file_name, "w")
         f.write(srt_txt)
         f.close()
