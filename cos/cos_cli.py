@@ -32,7 +32,7 @@ def upload_file(local_file_path, cos_file_path):
         raise SystemExit(1)
 
 
-def get_object_url(cos_file_path):
+def get_object_url(cos_file_path, verbose = False):
     client = create_client(Config.SECRET_ID, Config.SECRET_KEY)
     # 判断 COS 上文件是否存在
     try:
@@ -47,7 +47,8 @@ def get_object_url(cos_file_path):
                 Key=cos_file_path,
                 Expired = 1200,
             )
-            logger.info(f"Object URL: {url}")
+            if verbose:
+                logger.info(f"Object URL: {url}")
             return url
     except CosServiceError as err:
         logger.info(err)

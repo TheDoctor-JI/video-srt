@@ -41,7 +41,7 @@ def create_client(key_id, key_secret):
         return None
 
 
-def create_rec(engine_type, file_url):
+def create_rec(engine_type, file_url, verbose = False):
     client = create_client(Config.SECRET_ID, Config.SECRET_KEY)
     req = models.CreateRecTaskRequest()
     params = {
@@ -63,7 +63,8 @@ def create_rec(engine_type, file_url):
     req.Url = file_url
     try:
         resp = client.CreateRecTask(req)
-        logger.info(resp)
+        if(verbose):
+            logger.info(resp)
         requesid = resp.RequestId
         taskid = resp.Data.TaskId
         return requesid, taskid
@@ -72,7 +73,7 @@ def create_rec(engine_type, file_url):
         return None, None
 
 
-def query_rec_task(taskid):
+def query_rec_task(taskid, verbose = False):
     client = create_client(Config.SECRET_ID, Config.SECRET_KEY)
     req = models.DescribeTaskStatusRequest()
     params = '{"TaskId":' + str(taskid) + '}'
@@ -82,7 +83,8 @@ def query_rec_task(taskid):
         try:
             resp = client.DescribeTaskStatus(req)
             resp_json = resp.to_json_string()
-            logger.info(resp_json)
+            if(verbose):
+                logger.info(resp_json)
             resp_obj = json.loads(resp_json)
             if not resp_obj["Data"]:
                 return False, ""
@@ -94,7 +96,8 @@ def query_rec_task(taskid):
 
             time.sleep(1)
         except TencentCloudSDKException as err:
-            logger.info(err)
+            if(verbose):
+                logger.info(err)
             return False, ""
 
     return True, result
